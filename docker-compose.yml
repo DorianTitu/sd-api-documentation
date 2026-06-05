@@ -9,8 +9,31 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5436:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d api_documentation"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-documentation-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/api_documentation
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: VGhpc0lzQURldk9ubHlTZWNyZXRLZXlGb3JBcGlEb2N1bWVudGF0aW9uMjAyNg==
+      JWT_EXPIRATION_MS: 3600000
+    ports:
+      - "8080:8080"
 
 volumes:
   postgres_data:
