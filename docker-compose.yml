@@ -33,7 +33,7 @@ services:
       JWT_SECRET: VGhpc0lzQURldk9ubHlTZWNyZXRLZXlGb3JBcGlEb2N1bWVudGF0aW9uMjAyNg==
       JWT_EXPIRATION_MS: 3600000
     ports:
-      - "8080:8080"
+      - "18080:8080"
 
 volumes:
   postgres_data:

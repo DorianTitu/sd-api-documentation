@@ -116,6 +116,7 @@ public class DocumentedEndpointServiceImpl implements DocumentedEndpointService 
             String normalizedMethod
     ) {
         endpoint.setSchema(schema);
+        endpoint.setSourceUrl(schema.getSourceUrl());
         endpoint.setPath(request.path().trim());
         endpoint.setMethod(normalizedMethod);
         endpoint.setTag(request.tags().isEmpty() ? null : request.tags().get(0));
@@ -134,7 +135,7 @@ public class DocumentedEndpointServiceImpl implements DocumentedEndpointService 
         return new DocumentedEndpointResponse(
                 endpoint.getId(),
                 endpoint.getSchema().getId(),
-                endpoint.getSchema().getSourceUrl(),
+                endpoint.getSourceUrl(),
                 endpoint.getPath(),
                 endpoint.getMethod(),
                 endpoint.getTag(),

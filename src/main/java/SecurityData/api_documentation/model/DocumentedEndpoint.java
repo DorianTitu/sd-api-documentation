@@ -39,6 +39,9 @@ public class DocumentedEndpoint {
     @Column(nullable = false, length = 10)
     private String method;
 
+    @Column(name = "source_url", nullable = false, length = 500)
+    private String sourceUrl;
+
     @Column(length = 150)
     private String tag;
 
@@ -122,6 +125,14 @@ public class DocumentedEndpoint {
 
     public String getTag() {
         return tag;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
     }
 
     public void setTag(String tag) {
